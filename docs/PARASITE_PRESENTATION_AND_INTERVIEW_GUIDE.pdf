@@ -1,0 +1,1897 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 4861
+>>
+stream
+0.200025 w
+0 G
+BT
+/F2 16 Tf
+18.3999999999999986 TL
+0.145 0.388 0.922 rg
+40. 791.8899999999999864 Td
+(PARASITE: Presentation Slide Deck & Technical Interview Defense Guide) Tj
+ET
+0.9 0.91 0.92 RG
+40. 776.8899999999999864 m
+555.2799999999999727 776.8899999999999864 l
+S
+0.9 0.91 0.92 RG
+40. 758.8899999999999864 m
+555.2799999999999727 758.8899999999999864 l
+S
+BT
+/F2 13 Tf
+14.9499999999999993 TL
+0.067 0.094 0.153 rg
+40. 730.8899999999999864 Td
+(PART 1:  COMPLETE PPT SLIDE DECK OUTLINE) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 696.8899999999999864 Td
+(**Slide 1: Title Slide**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 680.8899999999999864 Td
+(• Title: PARASITE: Compiler-Based Structural Code Plagiarism Detection System) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 666.8899999999999864 Td
+(• Subtitle: Moving Beyond Text Matching via Lexical Normalization, AST Structural Hashing, and Multi-Metric Analysis) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 652.8899999999999864 Td
+(• Author: Neelesh Pathak) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 638.8899999999999864 Td
+(• Domain: Compiler Engineering & Static Program Analysis) Tj
+ET
+0.9 0.91 0.92 RG
+40. 611.8899999999999864 m
+555.2799999999999727 611.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 585.8899999999999864 Td
+(**Slide 2: Problem Statement & Motivation**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 569.8899999999999864 Td
+(• The Problem: Plagiarism in academic assignments and codebases is widespread.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 555.8899999999999864 Td
+(• Flaws of Traditional Tools \(e.g., `diff`, String Distance\):) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 541.8899999999999864 Td
+(• Fooled easily by variable renaming \(`count` $\\to$ `idx`\).) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 527.8899999999999864 Td
+(• Swallowed up by reformatting, indentation, or comment deletion.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 513.8899999999999864 Td
+(• Fail when statement order or control flow constructs are slightly altered \(e.g., `for` loop $\\to$ `while` loop\).) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 499.8899999999999864 Td
+(• The Core Solution: Treat code not as text, but as abstract programs. Apply compiler techniques \(Lexing, AST, CFG,) Tj
+T* (Data Flow\) to compare code structure regardless of superficial cosmetic changes.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 460.8899999999999864 m
+555.2799999999999727 460.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 434.8899999999999864 Td
+(**Slide 3: System Architecture & Data Flow Diagram \(DFD Level 1 & 2\)**) Tj
+ET
+0.95 0.96 0.96 rg
+40. 410.8899999999999864 515.2799999999999727 -242. re
+f
+0.82 0.84 0.86 RG
+40. 410.8899999999999864 515.2799999999999727 -242. re
+S
+BT
+/F5 8 Tf
+9.1999999999999993 TL
+0.2 0.255 0.333 rg
+50. 398.8899999999999864 Td
+(+---------------------------------------------------------------------------------+) Tj
+T* (|                                 LEVEL 1 DFD                                      |) Tj
+T* (+---------------------------------------------------------------------------------+) Tj
+T* ([ User Files ] ---> \( 1.0 Input Validation & Sanitization \)) Tj
+T* (                            |) Tj
+T* (                            v) Tj
+T* (                    \( 2.0 Whitelist & Boilerplate Filter \)) Tj
+T* (                            |) Tj
+T* (                            v) Tj
+T* (                    \( 3.0 Lexical Analysis / Token Normalizer \)) Tj
+T* (                            |) Tj
+T* (                            +-----------------------+-----------------------+) Tj
+T* (                            |                       |                       |) Tj
+T* (                            v                       v                       v) Tj
+T* (                  \( 4.0 Symbol Table \)    \( 5.0 AST Generator \)   \( 6.0 CFG / Data Flow \)) Tj
+T* (                            |                       |                       |) Tj
+T* (                            +-----------------------+-----------------------+) Tj
+T* (                                                    |) Tj
+T* (                                                    v) Tj
+T* (                                  \( 7.0 Multi-Metric Scoring Engine \)) Tj
+T* (                                                    |) Tj
+T* (                                                    v) Tj
+T* (                                  [ Similarity Matrix & PDF Report ]) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.612 0.639 0.686 rg
+40. 20. Td
+(PARASITE Plagiarism Detection System - Page 1 of 6) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 6771
+>>
+stream
+0.200025 w
+0.82 0.84 0.86 RG
+0.95 0.96 0.96 rg
+40. 801.8899999999999864 515.2799999999999727 -132. re
+f
+0.82 0.84 0.86 RG
+40. 801.8899999999999864 515.2799999999999727 -132. re
+S
+BT
+/F5 8 Tf
+9.1999999999999993 TL
+0.2 0.255 0.333 rg
+50. 789.8899999999999864 Td
+(+---------------------------------------------------------------------------------+) Tj
+T* (|                            LEVEL 2 DFD \(Scoring Engine\)                         |) Tj
+T* (+---------------------------------------------------------------------------------+) Tj
+T* (Token Stream ---> [ 3-gram Winnowing ] ---------> \( Token Sim: 25% \) --+) Tj
+T* (                                                                         |) Tj
+T* (AST Nodes    ---> [ Bottom-Up Tree Hash ] -----> \( AST Sim:   35% \) --+--> [ Weighted Sum ] ---> Combined %) Tj
+T* (                                                                         |) Tj
+T* (CFG Graph    ---> [ Structure Extractor ] -----> \( CFG Sim:   20% \) --+) Tj
+T* (                                                                         |) Tj
+T* (Def-Use      ---> [ Scope Depth Correlation ] -> \( Data Flow: 10% \) --+) Tj
+T* (                                                                         |) Tj
+T* (Line Sequence -> [ LCS Dynamic Programming ] ---> \( LCS Sim:   10% \) --+) Tj
+ET
+0.9 0.91 0.92 RG
+40. 646.8899999999999864 m
+555.2799999999999727 646.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 620.8899999999999864 Td
+(**Slide 4: Key Compiler Concepts Applied**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 604.8899999999999864 Td
+(1. Lexical Normalization: Converts raw text into abstract token streams \(VAR, NUM, OP_ASSIGN\).) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 589.8899999999999864 Td
+(2. Symbol Table Generation: Tracks identifier scopes, types, and frequencies.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 574.8899999999999864 Td
+(3. AST Construction & Bottom-Up Structural Hashing: Hierarchy representation invariant to identifier names.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 559.8899999999999864 Td
+(4. Control Flow Analysis \(CFG\): Extracts control blocks \(IF, LOOP, SWITCH, CALL\) and depth.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 544.8899999999999864 Td
+(5. Data Flow Analysis: Definition-Use \(Def-Use\) chain tracking.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 529.8899999999999864 Td
+(6. Parallel Web Workers: Offloading $O\(N^2\)$ matrix evaluations off the main browser thread.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 501.8899999999999864 m
+555.2799999999999727 501.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 475.8899999999999864 Td
+(**Slide 5: The PARASITE Processing Pipeline \(10-Stage Flow\)**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 451.8899999999999864 Td
+(1. Input Validation: Extension check, size limit enforcement \(1MB\), UTF-8 normalization.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 436.8899999999999864 Td
+(2. Boilerplate Whitelisting: Stripping headers \(#include, import java.util.*, package\), comments, and starter code.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 421.8899999999999864 Td
+(3. Lexical Analysis \(Tokenizer\): Language-specific token classification.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 406.8899999999999864 Td
+(4. Symbol Table Generation: Variable decl and scope depth registration.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 391.8899999999999864 Td
+(5. AST Normalization & Hashing: Recursively hashing child nodes.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 376.8899999999999864 Td
+(6. CFG Extraction: Identifying decision points and loop nest levels.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 361.8899999999999864 Td
+(7. Data Flow Extraction: Tracking variable read/write locations.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 346.8899999999999864 Td
+(8. Fingerprint Generation: Sliding 2/3/4-gram winnowing over normalized tokens.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 331.8899999999999864 Td
+(9. Similarity Computation: Applying the weighted score formula.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 316.8899999999999864 Td
+(10. Visualization & Report: Generating interactive matrices, radar charts, network graphs, and PDF reports.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 288.8899999999999864 m
+555.2799999999999727 288.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 262.8899999999999864 Td
+(**Slide 6: Mathematical Scoring Model**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 238.8899999999999864 Td
+($$\\text{Combined Score} = 0.35 \\times S_{\\text{AST}} + 0.25 \\times S_{\\text{Token}} + 0.20 \\times S_{\\text{CFG}} + 0.10) Tj
+T* (\\times S_{\\text{DataFlow}} + 0.10 \\times S_{\\text{LCS}}$$) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 203.8899999999999864 Td
+(• AST Structural Match \($S_{\\text{AST}}$\): Measures sub-tree structural identity.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 189.8899999999999864 Td
+(• N-Gram Token Similarity \($S_{\\text{Token}}$\): Measures local token sequence overlap.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 175.8899999999999864 Td
+(• Control Flow Match \($S_{\\text{CFG}}$\): Evaluates decision structure similarity.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 161.8899999999999864 Td
+(• Data Flow Match \($S_{\\text{DataFlow}}$\): Measures variable declaration & nesting correlation.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 147.8899999999999864 Td
+(• LCS Line Match \($S_{\\text{LCS}}$\): Measures continuous line-by-line sequence alignment.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 120.8899999999999864 m
+555.2799999999999727 120.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 94.8899999999999864 Td
+(**Slide 7: Technical Stack & Performance Benchmarks**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 78.8899999999999864 Td
+(• Frontend Dashboard: React 18, TypeScript, Tailwind CSS, Recharts, Lucide Icons.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 64.8899999999999864 Td
+(• Compiler Core: Custom TypeScript Lexer, Symbol Table, AST structural parser.) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.612 0.639 0.686 rg
+40. 20. Td
+(PARASITE Plagiarism Detection System - Page 2 of 6) Tj
+ET
+endstream
+endobj
+7 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 8 0 R
+>>
+endobj
+8 0 obj
+<<
+/Length 6893
+>>
+stream
+0.200025 w
+0.9 0.91 0.92 RG
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 801.8899999999999864 Td
+(• Concurrency: Web Workers \(`plagiarism.worker.ts`\) handling multi-file batch execution.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 787.8899999999999864 Td
+(• Benchmark Performance:) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 773.8899999999999864 Td
+(• Processing Speed: $<50\\text{ms}$ per 500-line code pair.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 759.8899999999999864 Td
+(• Matrix Calculation: $N=20$ files \(190 comparisons\) in $<1.5\\text{s}$ non-blocking execution.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 732.8899999999999864 m
+555.2799999999999727 732.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 706.8899999999999864 Td
+(**Slide 8: Future Technical Roadmap**) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 690.8899999999999864 Td
+(• Tree-Sitter / ANTLR Wasm Integration: Native CST multi-language parsing.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 676.8899999999999864 Td
+(• Program Dependence Graph \(PDG\): Graph isomorphism via Weisfeiler-Lehman kernels for statement-swap invariance.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 662.8899999999999864 Td
+(• Rabin-Karp Rolling Hash Winnowing: $O\(N\)$ linear-time MOSS-style fingerprinting.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+50. 648.8899999999999864 Td
+(• LLVM IR / Bytecode Pass: Comparing low-level bytecode to bypass surface syntax completely.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 621.8899999999999864 m
+555.2799999999999727 621.8899999999999864 l
+S
+BT
+/F2 13 Tf
+14.9499999999999993 TL
+0.067 0.094 0.153 rg
+40. 593.8899999999999864 Td
+(PART 2:  EXHAUSTIVE TECHNICAL INTERVIEW DEFENSE & Q&A) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 559.8899999999999864 Td
+(**Section A: Core Project & Personal Contribution**) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 529.8899999999999864 Td
+(**Q1: Explain PARASITE.**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 515.8899999999999864 m
+45. 451.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 505.8899999999999864 Td
+(Answer: PARASITE is a compiler-inspired static analysis system built to detect structural code plagiarism. Unlike) Tj
+T* (simple text-differencing tools, PARASITE analyzes code at multiple levels of program representation: Lexical tokens,) Tj
+T* (Abstract Syntax Trees \(AST\), Control Flow Graphs \(CFG\), and Data Flow dependency chains. It computes a) Tj
+T* (balanced, weighted similarity score \($35\\%\\text{ AST} + 25\\%\\text{ Token} + 20\\%\\text{ CFG} + 10\\%\\text{ Data Flow}) Tj
+T* (+ 10\\%\\text{ LCS}$\) that remains resilient against variable renaming, formatting changes, and statement reordering.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 431.8899999999999864 Td
+(**Q2: Why did you choose plagiarism detection?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 417.8899999999999864 m
+45. 377.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 407.8899999999999864 Td
+(Answer: Standard plagiarists bypass traditional text diffing tools in minutes simply by renaming variables or) Tj
+T* (reformatting code. I wanted to apply core compiler design principles \(Lexing, Parsing, Intermediate Representations,) Tj
+T* (Symbol Tables, Static Analysis\) to solve a practical, real-world software engineering problem.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 357.8899999999999864 Td
+(**Q3: What exactly was YOUR contribution?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 343.8899999999999864 m
+45. 327.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 333.8899999999999864 Td
+(Answer: As the primary architect and lead developer, I designed and implemented:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 321.8899999999999864 m
+45. 305.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 311.8899999999999864 Td
+(1. The multi-language tokenization and scope-aware token normalizer \(`tokenizeCode`\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 299.8899999999999864 m
+45. 283.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 289.8899999999999864 Td
+(2. The lightweight AST builder and bottom-up structural hashing algorithm \(`compareAST`\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 277.8899999999999864 m
+45. 261.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 267.8899999999999864 Td
+(3. The Control Flow and Data Flow extraction heuristics \(`compareControlFlowSimple`, `analyzeDataFlowSimple`\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 255.8899999999999864 m
+45. 239.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 245.8899999999999864 Td
+(4. The parallel Web Worker background execution engine \(`plagiarism.worker.ts`\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 233.8899999999999864 m
+45. 217.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 223.8899999999999864 Td
+(5. The full React dashboard with similarity matrices, network graph visualizations, and PDF generation.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 197.8899999999999864 Td
+(**Q4: What was the biggest technical challenge?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 183.8899999999999864 m
+45. 155.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 173.8899999999999864 Td
+(Answer: Balancing analysis depth with browser runtime performance. True tree-edit distance algorithms \(like) Tj
+T* (Zhang-Shasha\) operate at $O\(N^3\)$ complexity, which crashes or freezes browser threads on large submissions.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 149.8899999999999864 Td
+(>) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 134.8899999999999864 m
+45. 118.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 124.8899999999999864 Td
+(*Solution*: I designed a two-pronged approach:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 112.8899999999999864 m
+45. 84.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 102.8899999999999864 Td
+(1. Formulated a bottom-up node hashing technique that converts AST subtrees into normalized string hashes,) Tj
+T* (reducing structural comparison time to $O\(N\)$.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 78.8899999999999864 m
+45. 62.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 68.8899999999999864 Td
+(2. Offloaded all $O\(N^2\)$ matrix evaluations to Web Workers, keeping the UI responsive at 60 FPS.) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.612 0.639 0.686 rg
+40. 20. Td
+(PARASITE Plagiarism Detection System - Page 3 of 6) Tj
+ET
+endstream
+endobj
+9 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 10 0 R
+>>
+endobj
+10 0 obj
+<<
+/Length 6945
+>>
+stream
+1. w
+0.15 0.39 0.92 RG
+0.9 0.91 0.92 RG
+40. 796.8899999999999864 m
+555.2799999999999727 796.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 770.8899999999999864 Td
+(**Section B: Compiler & Parser Deep-Dive**) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 740.8899999999999864 Td
+(**Q5: What compiler or parser did you use? How did you generate the AST?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 726.8899999999999864 m
+45. 710.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 716.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 704.8899999999999864 m
+45. 652.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 694.8899999999999864 Td
+(- In the current implementation: To keep the web application self-contained and zero-dependency in the browser,) Tj
+T* (PARASITE uses a custom lexer-driven block-structure parser \(`parseSimpleAST`\). It tokenizes code, tracks scope) Tj
+T* (boundaries \(`{` and `}`\), constructs a hierarchical node tree \(`BlockStatement`, `FunctionDeclaration`, `IfStatement`\),) Tj
+T* (and recursively computes bottom-up structural hashes.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 646.8899999999999864 m
+45. 618.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 636.8899999999999864 Td
+(- Future Production Upgrade: For full language grammar support, the architecture is designed to plug in Tree-Sitter) Tj
+T* (\(via WebAssembly\) or ANTLR4 generated parsers for C++, Java, and Python.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 598.8899999999999864 Td
+(**Q6: Which parser library or grammar did you use \(e.g., Clang AST, Python ast, ANTLR\)?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 584.8899999999999864 m
+45. 532.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 574.8899999999999864 Td
+(Answer: The front-end processing engine uses a custom TypeScript-based Lexical and Syntactic Analyzer with) Tj
+T* (language-specific token definitions \(`C`, `C++`, `Java`, `Python`, `PHP`, `SQL`\). It implements custom symbol table) Tj
+T* (mapping and block-level AST hierarchy generation without requiring external native dependencies like Clang or) Tj
+T* (Python runtime binaries in the browser.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 512.8899999999999864 Td
+(**Q7: How do you traverse the AST—did you use depth-first search, visitor pattern, or tree edit distance?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 498.8899999999999864 m
+45. 482.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 488.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 476.8899999999999864 m
+45. 460.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 466.8899999999999864 Td
+(We use a post-order Depth-First Search \(DFS\) traversal combined with Hash Indexing:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 454.8899999999999864 m
+45. 438.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 444.8899999999999864 Td
+(1. We traverse down to leaf nodes first, computing leaf normalized hashes.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 432.8899999999999864 m
+45. 416.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 422.8899999999999864 Td
+(2. As we bubble up to parent nodes, parent hashes are calculated by sorting and concatenating child hashes:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 410.8899999999999864 m
+45. 394.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 400.8899999999999864 Td
+(   `node.normalizedHash = `${node.type}:${children.map\(c => c.normalizedHash\).sort\(\).join\(','\)}`;`) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 388.8899999999999864 m
+45. 360.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 378.8899999999999864 Td
+(3. This sorting step makes parent hashes invariant to child node ordering \(handling rearranged independent functions) Tj
+T* (or statements\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 354.8899999999999864 m
+45. 326.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 344.8899999999999864 Td
+(4. Finally, all AST nodes from Submission B are indexed in a Hash Map \($O\(1\)$ lookup\), enabling Submission A to) Tj
+T* (query matched subtrees in linear $O\(N\)$ time instead of expensive $O\(N^3\)$ tree edit distance.) Tj
+ET
+0.9 0.91 0.92 RG
+40. 307.8899999999999864 m
+555.2799999999999727 307.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 281.8899999999999864 Td
+(**Section C: Obfuscation & Normalization Strategies**) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 251.8899999999999864 Td
+(**Q8: Show me how variable renaming affects your similarity score.**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 237.8899999999999864 m
+45. 221.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 227.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 215.8899999999999864 m
+45. 199.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 205.8899999999999864 Td
+(Variable renaming has 0% impact on our AST and Token similarity metrics.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 193.8899999999999864 m
+45. 177.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 183.8899999999999864 Td
+(During lexical analysis:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 171.8899999999999864 m
+45. 155.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 161.8899999999999864 Td
+(- User identifiers like `calculate_factorial` and `compute_fact` are both mapped to the normalized token `VAR`.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 149.8899999999999864 m
+45. 133.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 139.8899999999999864 Td
+(- Integer literals `10` and `5` are both mapped to `NUM`.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 127.8899999999999864 m
+45. 99.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 117.8899999999999864 Td
+(- In AST node hashing, nodes of type `Identifier` append `|VAR` to their hash base regardless of the identifier's actual) Tj
+T* (string name.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 93.8899999999999864 Td
+(>) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 78.8899999999999864 m
+45. 50.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 68.8899999999999864 Td
+(*Empirical Result*: Comparing a code snippet with 100% renamed variables against its original yields an AST match) Tj
+T* (of 80–95% \(classified as `High` plagiarism with type `renamed`\).) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.612 0.639 0.686 rg
+40. 20. Td
+(PARASITE Plagiarism Detection System - Page 4 of 6) Tj
+ET
+endstream
+endobj
+11 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 12 0 R
+>>
+endobj
+12 0 obj
+<<
+/Length 7013
+>>
+stream
+1. w
+0.15 0.39 0.92 RG
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 795.8899999999999864 Td
+(**Q9: How does your pipeline handle adding dead code/dummy variables or swapping a `for` loop for a `while` loop?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 781.8899999999999864 m
+45. 765.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 771.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 759.8899999999999864 m
+45. 743.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 749.8899999999999864 Td
+(1. Variable Renaming: Handled via `VAR` token normalization and Symbol Table scope mapping.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 737.8899999999999864 m
+45. 709.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 727.8899999999999864 Td
+(2. Dead Code / Dummy Variables: Dilutes token sequence matching slightly, but Control Flow \(CFG\) and Data Flow) Tj
+T* (analyses detect that the dummy variables have isolated Def-Use chains \(no downstream data dependencies\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 703.8899999999999864 m
+45. 675.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 693.8899999999999864 Td
+(3. Swapping `for` for `while`: Both loop constructs generate loop-type CFG nodes \(`LOOP`\). The underlying block) Tj
+T* (statements retain identical AST child hashes, keeping structural similarity high.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 655.8899999999999864 Td
+(**Q10: What is the difference between lexical and syntactic similarity?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 641.8899999999999864 m
+45. 625.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 631.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 619.8899999999999864 m
+45. 591.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 609.8899999999999864 Td
+(- Lexical Similarity: Measures linear token sequences \(e.g., token N-grams\). It answers: *"Do these two programs) Tj
+T* (use similar keywords, operators, and token patterns in sequence?"*) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 585.8899999999999864 m
+45. 557.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 575.8899999999999864 Td
+(- Syntactic Similarity: Measures hierarchical tree structures \(AST\). It answers: *"Do these two programs have) Tj
+T* (identical control structures, nested blocks, and operator precedence trees, regardless of syntax layout?"*) Tj
+ET
+0.9 0.91 0.92 RG
+40. 538.8899999999999864 m
+555.2799999999999727 538.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 512.8899999999999864 Td
+(**Section D: Similarity Algorithms, Complexity & Scalability**) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 482.8899999999999864 Td
+(**Q11: Why combine N-grams with Longest Common Subsequence \(LCS\)? Why AST?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 468.8899999999999864 m
+45. 452.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 458.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 446.8899999999999864 m
+45. 430.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 436.8899999999999864 Td
+(- N-grams: Excellent at capturing local pattern context \(e.g., sequences of 3 tokens like `if \( VAR \)`\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 424.8899999999999864 m
+45. 396.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 414.8899999999999864 Td
+(- LCS \(Longest Common Subsequence\): Captures global sequential ordering across non-contiguous lines, identifying) Tj
+T* (matching code blocks separated by inserted noise.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 390.8899999999999864 m
+45. 374.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 380.8899999999999864 Td
+(- AST: Captures structural semantic hierarchy independent of visual line layout or token sequence shifts.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 368.8899999999999864 Td
+(>) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 353.8899999999999864 m
+45. 325.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 343.8899999999999864 Td
+(*Combining them*: N-grams catch localized code snippets, LCS catches sequential line alignment, and AST catches) Tj
+T* (tree structure. Together, they eliminate single-metric blind spots.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 305.8899999999999864 Td
+(**Q12: What is the complexity of LCS? How did you prevent performance bottlenecks \($O\(m \\times n\)$\)?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 291.8899999999999864 m
+45. 275.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 281.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 269.8899999999999864 m
+45. 241.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 259.8899999999999864 Td
+(Standard dynamic programming LCS has time and space complexity of $O\(m \\times n\)$, where $m$ and $n$ are) Tj
+T* (line/token lengths.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 235.8899999999999864 Td
+(>) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 220.8899999999999864 m
+45. 204.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 210.8899999999999864 Td
+(*Optimizations implemented*:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 198.8899999999999864 m
+45. 170.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 188.8899999999999864 Td
+(1. Boilerplate Whitelisting: We filter out imports, headers, comments, and empty lines first, reducing line count by) Tj
+T* (30-50%.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 164.8899999999999864 m
+45. 136.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 154.8899999999999864 Td
+(2. Length Pruning: We skip LCS dynamic programming calculation if line length is $<3$ characters or if line hash sets) Tj
+T* (have zero intersection.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 130.8899999999999864 m
+45. 102.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 120.8899999999999864 Td
+(3. Space Optimization: Memory allocation uses 2 row arrays instead of a full $m \\times n$ table, reducing space) Tj
+T* (complexity to $O\(\\min\(m, n\)\)$.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 82.8899999999999864 Td
+(**Q13: What fingerprinting algorithm did you use \(e.g., Winnowing, Rabin-Karp\)? How do N-grams and fingerprinting differ?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 68.8899999999999864 m
+45. 52.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 58.8899999999999864 Td
+(Answer:) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.612 0.639 0.686 rg
+40. 20. Td
+(PARASITE Plagiarism Detection System - Page 5 of 6) Tj
+ET
+endstream
+endobj
+13 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 14 0 R
+>>
+endobj
+14 0 obj
+<<
+/Length 5146
+>>
+stream
+1. w
+0.15 0.39 0.92 RG
+0.15 0.39 0.92 RG
+2. w
+45. 801.8899999999999864 m
+45. 785.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 791.8899999999999864 Td
+(- N-grams: Sliding windows of size $N$ \(we use 2, 3, and 4-grams\) that record every token sequence.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 779.8899999999999864 m
+45. 751.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 769.8899999999999864 Td
+(- Fingerprinting \(Winnowing Algorithm\): Hashes each N-gram and selects only the minimum hash value within a) Tj
+T* (sliding window of size $W$.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 745.8899999999999864 m
+45. 705.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 735.8899999999999864 Td
+(- *Difference*: Winnowing reduces storage by 70-90% by storing a compact set of representative hashes) Tj
+T* (\(fingerprints\) instead of storing every single N-gram, while guaranteeing that matches over a minimum guaranteed) Tj
+T* (length are detected.) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 685.8899999999999864 Td
+(**Q14: How do you reduce false positives? How would you scale to thousands of submissions?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 671.8899999999999864 m
+45. 655.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 661.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 649.8899999999999864 m
+45. 633.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 639.8899999999999864 Td
+(- Reducing False Positives:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 627.8899999999999864 m
+45. 599.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 617.8899999999999864 Td
+(  1. Boilerplate Whitelisting: Strips mandatory framework code \(`public static void main`, `#include <stdio.h>`,) Tj
+T* (standard imports\) so common starter code isn't flagged as plagiarism.) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 593.8899999999999864 m
+45. 565.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 583.8899999999999864 Td
+(  2. Balanced Multi-Metric Weighting: Prevents high similarity flags caused by a single metric \(e.g., standard line) Tj
+T* (matches\).) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 559.8899999999999864 Td
+(>) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 544.8899999999999864 m
+45. 528.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 534.8899999999999864 Td
+(- Scaling to Thousands of Submissions \($O\(N^2\)$ Pairwise Problem\):) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 522.8899999999999864 m
+45. 494.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 512.8899999999999864 Td
+(  1. Pre-filtering via MinHash LSH \(Locality-Sensitive Hashing\): Groups submissions into similarity buckets in $O\(N\)$) Tj
+T* (time so we only run full AST/LCS analysis on candidate pairs \($O\(1\)$ comparisons per item\).) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 488.8899999999999864 m
+45. 460.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 478.8899999999999864 Td
+(  2. Distributed Queue Architecture: Offload pairwise jobs across serverless cloud workers \(e.g. AWS Lambda /) Tj
+T* (Celery worker nodes\).) Tj
+ET
+0.9 0.91 0.92 RG
+40. 441.8899999999999864 m
+555.2799999999999727 441.8899999999999864 l
+S
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.145 0.388 0.922 rg
+40. 415.8899999999999864 Td
+(**Section E: Supported Languages & Language Parsing**) Tj
+ET
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.09 0.165 rg
+40. 385.8899999999999864 Td
+(**Q15: Which languages does PARASITE support, and how do you parse them?**) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 371.8899999999999864 m
+45. 355.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 361.8899999999999864 Td
+(Answer:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 349.8899999999999864 m
+45. 333.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 339.8899999999999864 Td
+(PARASITE supports 6 major languages: C, C++, Java, Python, PHP, and SQL.) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.122 0.161 0.216 rg
+40. 327.8899999999999864 Td
+(>) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 312.8899999999999864 m
+45. 296.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 302.8899999999999864 Td
+(*Parsing Method*:) Tj
+ET
+0.15 0.39 0.92 RG
+2. w
+45. 290.8899999999999864 m
+45. 250.8899999999999864 l
+S
+1. w
+BT
+/F3 9.5 Tf
+10.9249999999999989 TL
+0.278 0.333 0.412 rg
+55. 280.8899999999999864 Td
+(Each language is configured with a specialized dictionary of keywords \(`KEYWORDS[language]`\), comment rules,) Tj
+T* (and preprocessor syntax. The lexical analyzer applies regular expression tokenization customized to the target) Tj
+T* (language syntax, normalizes symbols into generic intermediate representations, and builds block-structured ASTs.) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.612 0.639 0.686 rg
+40. 20. Td
+(PARASITE Plagiarism Detection System - Page 6 of 6) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R ]
+/Count 6
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+19 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+20 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+21 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+22 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+23 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+24 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+25 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+26 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+27 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+28 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 15 0 R
+/F2 16 0 R
+/F3 17 0 R
+/F4 18 0 R
+/F5 19 0 R
+/F6 20 0 R
+/F7 21 0 R
+/F8 22 0 R
+/F9 23 0 R
+/F10 24 0 R
+/F11 25 0 R
+/F12 26 0 R
+/F13 27 0 R
+/F14 28 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+29 0 obj
+<<
+/Producer (jsPDF 4.2.1)
+/CreationDate (D:20261002221850+05'30')
+>>
+endobj
+30 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 31
+0000000000 65535 f 
+0000038786 00000 n 
+0000040640 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000005065 00000 n 
+0000005202 00000 n 
+0000012025 00000 n 
+0000012162 00000 n 
+0000019107 00000 n 
+0000019245 00000 n 
+0000026243 00000 n 
+0000026382 00000 n 
+0000033448 00000 n 
+0000033587 00000 n 
+0000038875 00000 n 
+0000039001 00000 n 
+0000039132 00000 n 
+0000039266 00000 n 
+0000039404 00000 n 
+0000039528 00000 n 
+0000039657 00000 n 
+0000039789 00000 n 
+0000039925 00000 n 
+0000040053 00000 n 
+0000040180 00000 n 
+0000040309 00000 n 
+0000040442 00000 n 
+0000040544 00000 n 
+0000040893 00000 n 
+0000040979 00000 n 
+trailer
+<<
+/Size 31
+/Root 30 0 R
+/Info 29 0 R
+/ID [ <207E6F3BD19CC6B3B1AA49E786DFFC48> <207E6F3BD19CC6B3B1AA49E786DFFC48> ]
+>>
+startxref
+41083
+%%EOF
